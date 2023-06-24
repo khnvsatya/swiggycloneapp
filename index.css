@@ -14,6 +14,11 @@ body {
   margin: 0 auto;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
 .main-body {
   background-color: rgb(255, 255, 255);
   padding: 20px;
@@ -40,12 +45,12 @@ body {
   font-size: 20px;
 }
 
-.nav-items > ul > li {
+.nav-items > ul li {
   padding: 10px;
   margin: 10px;
   list-style: none;
   text-transform: capitalize;
-  text-decoration: underline;
+  text-decoration: none;
   cursor: pointer;
 }
 
@@ -158,4 +163,27 @@ body {
   padding: 5px;
   border-radius: 0px 25px 25px 0px;
   border: 1px solid black;
+}
+
+.menu-card {
+  width: 60vw;
+  margin: 25px auto;
+}
+
+.menu-card li {
+  list-style: none;
+}
+
+.menu-item {
+  margin: 10px 0px 20px 0px;
+}
+
+.Hotel-details {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.recomendations {
+  margin-top: 40px;
 }
