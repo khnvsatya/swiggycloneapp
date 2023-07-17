@@ -2,18 +2,19 @@ import React, { useState, useEffect } from "react";
 import ResturantCard from "./RestaurantCard";
 import ShimmerContainer from "./ShimmerContainer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
   const [listOfRes, setListofRes] = useState([]);
   const [filteredRes, setFilteredRes] = useState([]);
   const [isFilter, setIsFilter] = useState(false);
   const [searchText, setSearchText] = useState("");
-
+  const onlineStatus = useOnlineStatus();
   const handleSearch = () => {
     const fil = (isFilter ? filteredRes : listOfRes).filter((res) =>
       res.data.name.toLowerCase().includes(searchText.toLowerCase())
     );
-    console.log(listOfRes, fil);
+    // console.log(listOfRes, fil);
     setFilteredRes(fil);
     setSearchText("");
   };
@@ -28,7 +29,6 @@ const Body = () => {
 
   useEffect(() => {
     fetchData();
-    console.log("useeffect");
   }, []);
 
   const fetchData = async () => {
@@ -41,6 +41,9 @@ const Body = () => {
     setFilteredRes(json?.data?.cards[2]?.data?.data?.cards);
   };
 
+  if (onlineStatus == false) {
+    return <h1>it's look like you are Offline, check your connection</h1>;
+  }
   if (filteredRes?.length === 0) {
     return <ShimmerContainer />;
   }
@@ -76,7 +79,6 @@ const Body = () => {
       </div>
 
       <div className="res-Container">
-        {console.log(listOfRes)}
         {filteredRes?.map((res) => (
           <Link to={"/restaurant/" + res.data.id} key={res.data.id}>
             <ResturantCard resInfo={res} />
