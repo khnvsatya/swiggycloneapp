@@ -48,15 +48,18 @@ const Body = () => {
     return <ShimmerContainer />;
   }
   return (
-    <div className="main-body">
-      <div className="filter-box">
+    <div className="main-body bg-opacity-50 ">
+      <div className="filter-box flex py-[5px] px-[20px] mr-[10px] align-middle justify-between">
         <div>
-          <button className="filter-btn" onClick={handleTopRatedResList}>
+          <button
+            className="filter-btn p-[5px] border-2 rounded-sm ml-[3px] bg-slate-100 "
+            onClick={handleTopRatedResList}
+          >
             Top rated Restaurants
           </button>
           {isFilter && (
             <button
-              className="clear-btn"
+              className="clear-btn p-[5px] border-2 rounded-sm ml-[3px]"
               onClick={() => {
                 setIsFilter(!isFilter);
                 setFilteredRes(listOfRes);
@@ -66,25 +69,32 @@ const Body = () => {
             </button>
           )}
         </div>
-        <div className="search">
+        <div className="search p-[10px]">
           <input
+            className=" text-left p-[5px] border-2 rounded-lt-[25px] rounded-l-[25px] focus:outline-0"
             type="text"
             onChange={(e) => {
               setSearchText(e.target.value);
             }}
             value={searchText}
           />
-          <button onClick={handleSearch}>Search</button>
+          <button
+            className="p-[5px] rounded-r-[25px] rounded-br-[25px] border-2"
+            onClick={handleSearch}
+          >
+            Search
+          </button>
         </div>
       </div>
-
-      <div className="res-Container">
+      <div className="h-full w-full">
+      <div className="res-Container w-[90%] m-auto flex flex-wrap align-middle">
         {filteredRes?.map((res) => (
           <Link to={"/restaurant/" + res.data.id} key={res.data.id}>
             <ResturantCard resInfo={res} />
           </Link>
         ))}
       </div>
+    </div>
     </div>
   );
 };

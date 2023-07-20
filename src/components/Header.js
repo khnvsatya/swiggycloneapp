@@ -6,24 +6,26 @@ import useOnlineStatus from "../utils/useOnlineStatus";
 const Header = () => {
   const onlineStatus = useOnlineStatus();
   return (
-    <div className="header">
-      <div className="logoContainer">
-        <img className="logo" src={LOGO_URL} alt="Fast Food Logo" />
+    <div className="header flex justify-between shadow-sm">
+      <div className="logoContainer  ">
+        <img className="logo w-24 h-auto" src={LOGO_URL} alt="Fast Food Logo" />
       </div>
       <div className="nav-items">
-        <ul>
-          <li>Online Status: {onlineStatus ? "✅" : "🔴"}</li>
+        <ul className="flex justify-center align-middle m-5  text-xl">
+          <li className="p-4 cursor-pointer">
+            Online Status: {onlineStatus ? "✅" : "🔴"}
+          </li>
           <Link to="/">
-            <li>Home</li>
+            <li className="p-4  cursor-pointer">Home</li>
           </Link>
           <Link to="/about">
-            <li>About Us </li>
+            <li className="p-4  cursor-pointer">About Us </li>
           </Link>
           <Link to="contact">
-            <li>Contact</li>
+            <li className="p-4  cursor-pointer">Contact</li>
           </Link>
           <Link>
-            <li>Login</li>
+            <li className="p-4  cursor-pointer">Login</li>
           </Link>
         </ul>
       </div>

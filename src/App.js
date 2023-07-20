@@ -4,7 +4,6 @@ import Body from "./components/Body";
 import { Outlet, createBrowserRouter } from "react-router-dom";
 import Error from "./components/Error";
 import Contact from "./components/Contact";
-// import RestaurantMenuCard from "./components/RestaurantMenuCard";
 const About = lazy(() => import("./components/About"));
 const RestaurantMenuCard = lazy(() =>
   import("./components/RestaurantMenuCard")

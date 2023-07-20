@@ -1,4 +1,4 @@
-import Shimmer from "./shimmer";
+import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
 import useRestaurantMenuCard from "../utils/useRestaurantMenuCard";
 
@@ -26,12 +26,12 @@ const RestaurantMenuCard = () => {
         ?.card?.card;
   console.log(itemCards);
   return (
-    <div className="menu-card">
-      <h3>{name}</h3>
-      <div className="Hotel-details">
+    <div className="menu-card w-[60vw] my-[25px] mx-auto">
+      <h3 className="font-bold text-lg">{name}</h3>
+      <div className="Hotel-details flex justify-between mt-[10px]">
         <div>
-          <p>{cuisines.join(",")}</p>
-          <p>{areaName}</p>
+          <p className=" text-sm">{cuisines.join(",")}</p>
+          <p className=" text-sm">{areaName}</p>
           <p>
             <b>{costForTwoMessage}</b>
           </p>
@@ -43,11 +43,14 @@ const RestaurantMenuCard = () => {
         </div>
       </div>
 
-      <div className="recomendations">
-        <h3>Recomended</h3>
+      <div className="recomendations mt-[40px]">
+        <h3 className=" font-bold">Recomended</h3>
         <ul>
           {itemCards?.map((item) => (
-            <li key={item.card.info.id} className="menu-item">
+            <li
+              key={item.card.info.id}
+              className="menu-item mt-[10px] mb-[20px] mx-0"
+            >
               <h3> {item.card.info.name}</h3>
               <p>Rs{item.card.info.price / 100}.00</p>
               <p>{item.card.info.description}</p>
