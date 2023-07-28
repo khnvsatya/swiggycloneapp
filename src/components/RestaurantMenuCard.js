@@ -1,13 +1,17 @@
-import Shimmer from "./Shimmer";
+import { useState } from "react";
+import { MenuShimmer } from "./Shimmer";
 import { useParams } from "react-router-dom";
 import useRestaurantMenuCard from "../utils/useRestaurantMenuCard";
+import ItemList from "./ItemList";
+import RestaurantCategeory from "./RestaurantCategeory";
 
 const RestaurantMenuCard = () => {
   const { id } = useParams();
-
+  const [showIndex, setShowIndex] = useState(0);
   const resData = useRestaurantMenuCard(id);
+  // console.log(resData);
 
-  if (resData === null) return <Shimmer />;
+  if (resData === null) return <MenuShimmer />;
 
   const {
     name,
@@ -24,7 +28,20 @@ const RestaurantMenuCard = () => {
         ?.card?.card
     : resData?.data?.cards[1]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]
         ?.card?.card;
-  console.log(itemCards);
+
+  // console.log(itemCards);
+
+  const categeories =
+    resData?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+      (c) => {
+        return (
+          c.card?.card?.["@type"] ===
+          "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+        );
+      }
+    );
+  console.log(categeories);
+
   return (
     <div className="menu-card w-[60vw] my-[25px] mx-auto">
       <h3 className="font-bold text-lg">{name}</h3>
@@ -43,21 +60,21 @@ const RestaurantMenuCard = () => {
         </div>
       </div>
 
-      <div className="recomendations mt-[40px]">
-        <h3 className=" font-bold">Recomended</h3>
-        <ul>
-          {itemCards?.map((item) => (
-            <li
-              key={item.card.info.id}
-              className="menu-item mt-[10px] mb-[20px] mx-0"
-            >
-              <h3> {item.card.info.name}</h3>
-              <p>Rs{item.card.info.price / 100}.00</p>
-              <p>{item.card.info.description}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
+      {categeories.map((categeory, index) => (
+        <>
+          <RestaurantCategeory
+            key={categeory?.card?.card.title}
+            data={categeory?.card?.card}
+            showItems={index === showIndex ? true : false}
+            setShowIndex={() =>
+              setShowIndex((prev) => (prev === index ? null : index))
+            }
+          />
+          <hr className="h-4 w-full bg-gray-100 mt-2 mb-3 border-0" />
+        </>
+      ))}
+
+      {/* <ItemList itemCards={itemCards} /> */}
     </div>
   );
 };
