@@ -2,7 +2,6 @@ import { useState } from "react";
 import { MenuShimmer } from "./Shimmer";
 import { useParams } from "react-router-dom";
 import useRestaurantMenuCard from "../utils/useRestaurantMenuCard";
-import ItemList from "./ItemList";
 import RestaurantCategeory from "./RestaurantCategeory";
 
 const RestaurantMenuCard = () => {
@@ -40,7 +39,7 @@ const RestaurantMenuCard = () => {
         );
       }
     );
-  console.log(categeories);
+  // console.log(categeories);
 
   return (
     <div className="menu-card w-[60vw] my-[25px] mx-auto">
@@ -63,7 +62,7 @@ const RestaurantMenuCard = () => {
       {categeories.map((categeory, index) => (
         <>
           <RestaurantCategeory
-            key={categeory?.card?.card.title}
+            key={categeory?.card?.card.title + index}
             data={categeory?.card?.card}
             showItems={index === showIndex ? true : false}
             setShowIndex={() =>

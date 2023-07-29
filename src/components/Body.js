@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import ResturantCard from "./RestaurantCard";
 import ShimmerContainer from "./ShimmerContainer";
 import { Link, useNavigate } from "react-router-dom";
-import useOnlineStatus from "../utils/useOnlineStatus";
+import useOnlineStatus from "../utils/UseOnlineStatus";
 import { ResturantCardWithPromoted } from "./RestaurantCard";
-import { fromJSON } from "postcss";
 
 const Body = () => {
   const [listOfRes, setListofRes] = useState([]);
@@ -14,7 +13,7 @@ const Body = () => {
   const onlineStatus = useOnlineStatus();
   const navigate = useNavigate();
   const WithPromotedCard = ResturantCardWithPromoted(ResturantCard);
-  // console.log(filteredRes);
+
   const handleSearch = () => {
     const fil = (isFilter ? filteredRes : listOfRes).filter((res) =>
       res.info.name.toLowerCase().includes(searchText.toLowerCase())
@@ -25,7 +24,9 @@ const Body = () => {
   };
 
   const handleTopRatedResList = (value) => {
-    const filteredList = listOfRes.filter((res) => res.info.avgRating > value);
+    const filteredList = listOfRes?.filter(
+      (res) => res?.info?.avgRating > value
+    );
     console.log(filteredList);
     setIsFilter(true);
     setFilteredRes(filteredList);
@@ -38,28 +39,31 @@ const Body = () => {
   }, []);
 
   const fetchData = async () => {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.385044&lng=78.486671&page_type=DESKTOP_WEB_LISTING"
-    );
-
-    const json = await data.json();
-    // setListofRes(json?.data?.cards[2]?.data?.data?.cards);
-    // setFilteredRes(json?.data?.cards[2]?.data?.data?.cards);
-    setListofRes(
-      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
-    setFilteredRes(
-      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
-    console.log(
-      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
+    try {
+      const data = await fetch(
+        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.385044&lng=78.486671&page_type=DESKTOP_WEB_LISTING"
+      );
+      const json = await data.json();
+      // setListofRes(json?.data?.cards[2]?.data?.data?.cards);
+      // setFilteredRes(json?.data?.cards[2]?.data?.data?.cards);
+      setListofRes(
+        json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants
+      );
+      setFilteredRes(
+        json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants
+      );
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
-  localStorage.setItem("Data", JSON.stringify(listOfRes));
+  // localStorage.setItem("Data", JSON.stringify(listOfRes));
   if (onlineStatus == false) {
     return <h1>it's look like you are Offline, check your connection</h1>;
   }
+  // console.log(listOfRes, filteredRes);
   if (listOfRes?.length === 0) {
     return <ShimmerContainer />;
   }
@@ -71,7 +75,7 @@ const Body = () => {
       <div className="filter-box flex py-[5px] px-[20px] mr-[10px] align-middle justify-between">
         <div>
           <button
-            className="filter-btn p-[5px] border-2 rounded-full ml-[3px] bg-slate-100 "
+            className="filter-btn p-[5px] border-2 rounded-full ml-[12px] bg-slate-100 "
             onClick={() => {
               handleTopRatedResList(4);
             }}
@@ -79,7 +83,7 @@ const Body = () => {
             Ratings 4.0+
           </button>
           <button
-            className="filter-btn p-[5px] border-2 rounded-full ml-[3px] bg-slate-100 "
+            className="filter-btn p-[5px] border-2 rounded-full ml-[12px]  bg-slate-100 "
             onClick={() => {
               handleTopRatedResList(4.5);
             }}
@@ -88,7 +92,7 @@ const Body = () => {
           </button>
           {isFilter && (
             <button
-              className="clear-btn p-[5px] border-2 rounded-full ml-[3px]"
+              className="clear-btn p-[5px] border-2 rounded-full ml-[12px]"
               onClick={() => {
                 setIsFilter(!isFilter);
                 setFilteredRes(listOfRes);

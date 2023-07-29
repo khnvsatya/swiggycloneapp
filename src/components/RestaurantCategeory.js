@@ -5,7 +5,6 @@ const RestaurantCategeory = ({ data, showItems, setShowIndex }) => {
   //   console.log(data);
 
   const handleCardVisibility = () => {
-    console.log("hi");
     setShowIndex();
   };
 
@@ -15,7 +14,9 @@ const RestaurantCategeory = ({ data, showItems, setShowIndex }) => {
         className="flex justify-between cursor-pointer"
         onClick={handleCardVisibility}
       >
-        <h3 className=" font-bold">{data.title}</h3>
+        <h3 className=" font-bold">
+          {data.title}({data.itemCards.length})
+        </h3>
         <span className=" text-xl ">{showItems ? "^" : "⌄"}</span>
       </div>
       {showItems && <ItemList itemCards={data.itemCards} />}

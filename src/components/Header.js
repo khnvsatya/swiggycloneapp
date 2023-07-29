@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { LOGO_URL } from "../utils/constant";
 import { Link } from "react-router-dom";
-import useOnlineStatus from "../utils/useOnlineStatus";
+import { UserContext, OnlineContext } from "../utils/UserContext";
+import { useSelector } from "react-redux";
 
 const Header = () => {
-  const onlineStatus = useOnlineStatus();
+  const { loggedInUser } = useContext(UserContext);
+  let onlineState = useContext(OnlineContext);
+
+  const cartItems = useSelector((store) => store.cart.items);
+
   return (
     <div className="header flex justify-between shadow-sm">
       <div className="logoContainer  ">
@@ -13,7 +18,7 @@ const Header = () => {
       <div className="nav-items">
         <ul className="flex justify-center align-middle m-5  text-xl">
           <li className="p-4 cursor-pointer">
-            Online Status: {onlineStatus ? "✅" : "🔴"}
+            Online Status: {onlineState ? "✅" : "🔴"}
           </li>
           <Link to="/">
             <li className="p-4  cursor-pointer">Home</li>
@@ -24,9 +29,12 @@ const Header = () => {
           <Link to="contact">
             <li className="p-4  cursor-pointer">Contact</li>
           </Link>
-          <Link>
-            <li className="p-4  cursor-pointer">Login</li>
+          <Link to="/cart">
+            <li className="p-4  cursor-pointer">Cart({cartItems.length})</li>
           </Link>
+          <span className="p-4  cursor-pointer border-2 rounded-full bg-stone-500 text-white ">
+            {loggedInUser}
+          </span>
         </ul>
       </div>
     </div>
