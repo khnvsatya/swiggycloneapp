@@ -6,14 +6,14 @@ import Error from "./components/Error";
 import Contact from "./components/Contact";
 import { OnlineContext, UserContext } from "./utils/UserContext";
 import UseOnlineStatus from "./utils/UseOnlineStatus";
-import Cart from "./components/Cart";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
 
-const About = lazy(() => import("./components/About"));
 const RestaurantMenuCard = lazy(() =>
   import("./components/RestaurantMenuCard")
 );
+const Cart = lazy(() => import("./components/Cart"));
+const About = lazy(() => import("./components/About"));
 
 const App = () => {
   const onlineState = UseOnlineStatus();
@@ -65,7 +65,11 @@ export const approuter = createBrowserRouter([
       },
       {
         path: "/cart",
-        element: <Cart />,
+        element: (
+          <Suspense fallback="loading">
+            <Cart />
+          </Suspense>
+        ),
       },
       {
         path: "/restaurant/:id",

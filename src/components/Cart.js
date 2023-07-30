@@ -70,8 +70,10 @@ function Cart() {
               })}
               <hr className="my-2" />
               <div className="mx-2 flex justify-between">
-                <p className="ml-4 text-lg font-bold">Total:</p>
-                <span className="text-right mr-3">{cartTotal}</span>
+                <p className="ml-4 text-lg font-bold">To Pay:</p>
+                <span className="text-right mr-3 text-lg font-bold">
+                  {cartTotal}
+                </span>
               </div>
             </div>
           </div>

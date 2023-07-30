@@ -4,14 +4,15 @@ import ShimmerContainer from "./ShimmerContainer";
 import { Link, useNavigate } from "react-router-dom";
 import useOnlineStatus from "../utils/UseOnlineStatus";
 import { ResturantCardWithPromoted } from "./RestaurantCard";
+import { DATA_URL } from "../utils/constant";
 
 const Body = () => {
+  const navigate = useNavigate();
   const [listOfRes, setListofRes] = useState([]);
   const [filteredRes, setFilteredRes] = useState([]);
   const [isFilter, setIsFilter] = useState(false);
   const [searchText, setSearchText] = useState("");
   const onlineStatus = useOnlineStatus();
-  const navigate = useNavigate();
   const WithPromotedCard = ResturantCardWithPromoted(ResturantCard);
 
   const handleSearch = () => {
@@ -40,9 +41,7 @@ const Body = () => {
 
   const fetchData = async () => {
     try {
-      const data = await fetch(
-        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.385044&lng=78.486671&page_type=DESKTOP_WEB_LISTING"
-      );
+      const data = await fetch(DATA_URL);
       const json = await data.json();
       // setListofRes(json?.data?.cards[2]?.data?.data?.cards);
       // setFilteredRes(json?.data?.cards[2]?.data?.data?.cards);
@@ -54,16 +53,19 @@ const Body = () => {
         json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants
       );
+      console.log(
+        json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants
+      );
     } catch (error) {
       console.log(error.message);
     }
   };
 
-  // localStorage.setItem("Data", JSON.stringify(listOfRes));
   if (onlineStatus == false) {
     return <h1>it's look like you are Offline, check your connection</h1>;
   }
-  // console.log(listOfRes, filteredRes);
+  console.log(listOfRes, filteredRes);
   if (listOfRes?.length === 0) {
     return <ShimmerContainer />;
   }
