@@ -19,12 +19,12 @@ const ItemList = ({ itemCards, cart }) => {
           const { id, name, price, description, imageId, defaultPrice } =
             item?.card?.info;
           return (
-            <div key={id + index}>
+            <div key={`${id}${index}`}>
               <li className="menu-item mt-[10px] mb-[20px] mx-0 flex justify-between pr-2">
                 <div className=" w-9/12 pt-4 pb-1 ">
                   <h3 className=" font-bold"> {name}</h3>
                   <p className=" font-medium">
-                    ₹{(defaultPrice | price) / 100}.00
+                    ₹ {parseInt((price | defaultPrice) / 100).toFixed(2)}
                   </p>
                   <p className=" text-[rgba(40,44,63,.45)] text-sm">
                     {description}

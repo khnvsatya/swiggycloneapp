@@ -60,9 +60,8 @@ const RestaurantMenuCard = () => {
       </div>
 
       {categeories.map((categeory, index) => (
-        <>
+        <div key={`${categeory?.card?.card.title} `}>
           <RestaurantCategeory
-            key={categeory?.card?.card.title + index}
             data={categeory?.card?.card}
             showItems={index === showIndex ? true : false}
             setShowIndex={() =>
@@ -70,7 +69,7 @@ const RestaurantMenuCard = () => {
             }
           />
           <hr className="h-4 w-full bg-gray-100 mt-2 mb-3 border-0" />
-        </>
+        </div>
       ))}
 
       {/* <ItemList itemCards={itemCards} /> */}

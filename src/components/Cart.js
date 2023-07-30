@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import ItemList from "./ItemList";
@@ -6,16 +6,35 @@ import { clearCart } from "../utils/cartSlice";
 
 function Cart() {
   const dispath = useDispatch();
+  const cartItems = useSelector((store) => store.cart.items);
 
   const [cartPage, setCartPage] = useState(true);
-  const [cartToatal, setCartTotal] = useState(null);
-  const cartItems = useSelector((store) => store.cart.items);
-  console.log(cartItems);
+  const [cartTotal, setCartTotal] = useState(null);
 
   const handleClearCart = () => {
     setCartPage(false);
     dispath(clearCart());
   };
+
+  const handleCartTotal = (cartItems) => {
+    let Total = 0;
+    for (let i = 0; i < cartItems.length; i++) {
+      Total =
+        Total +
+        parseInt(
+          (cartItems[i]?.card?.info?.price |
+            cartItems[i]?.card?.info?.defaultPrice) /
+            100
+        );
+    }
+    setCartTotal(Total.toFixed(2));
+  };
+
+  useEffect(() => {
+    handleCartTotal(cartItems);
+    console.log("this is useeffect");
+  }, [cartItems]);
+
   return (
     <div>
       {cartItems.length ? (
@@ -36,22 +55,24 @@ function Cart() {
           <div className="w-4/12 h-[100vw] m-2">
             <h3 className="text-center font-bold m-5 text-lg">TOTAL</h3>
             <div>
-              {cartItems.map((item) => {
-                console.log(item);
+              {cartItems.map((item, index) => {
                 const { id, name, price, defaultPrice } = item?.card?.info;
                 return (
-                  <div>
-                    <div key={id} className=" mx-2 flex justify-between">
+                  <div key={`${id}${index}`}>
+                    <div className=" mx-2 flex justify-between">
                       <p className="w-7/12 text-wrap">{name}</p>
                       <p className="w-5/12 text-right mr-3">
-                        {(price | defaultPrice) / 100}.00
+                        {parseInt((price | defaultPrice) / 100).toFixed(2)}
                       </p>
                     </div>
                   </div>
                 );
               })}
               <hr className="my-2" />
-              <p className="ml-4">Total:{cartToatal} </p>
+              <div className="mx-2 flex justify-between">
+                <p className="ml-4 text-lg font-bold">Total:</p>
+                <span className="text-right mr-3">{cartTotal}</span>
+              </div>
             </div>
           </div>
         </div>
