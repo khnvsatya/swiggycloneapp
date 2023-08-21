@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import ResturantCard from "./RestaurantCard";
 import ShimmerContainer from "./ShimmerContainer";
 import { Link, useNavigate } from "react-router-dom";
-import useOnlineStatus from "../utils/useOnlinestatus";
+import UseOnlineStatus from "../utils/useOnlinestatus";
 import { ResturantCardWithPromoted } from "./RestaurantCard";
 import { DATA_URL } from "../utils/constant";
 
@@ -12,7 +12,7 @@ const Body = () => {
   const [filteredRes, setFilteredRes] = useState([]);
   const [isFilter, setIsFilter] = useState(false);
   const [searchText, setSearchText] = useState("");
-  const onlineStatus = useOnlineStatus();
+  const onlineStatus = UseOnlineStatus();
   const WithPromotedCard = ResturantCardWithPromoted(ResturantCard);
 
   const handleSearch = () => {
