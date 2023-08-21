@@ -4,7 +4,7 @@ import Body from "./components/Body";
 import { Outlet, createBrowserRouter } from "react-router-dom";
 import Error from "./components/Error";
 import Contact from "./components/Contact";
-import { userContext } from "./utils/userContext";
+import { UserContext } from "./utils/userContext";
 
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
@@ -28,9 +28,9 @@ const App = () => {
   return (
     <Provider store={appStore}>
       <div className="app">
-        <userContext.Provider value={{ loggedInUser: username }}>
+        <UserContext.Provider value={{ loggedInUser: username }}>
           <Header />
-        </userContext.Provider>
+        </UserContext.Provider>
         <Outlet />
       </div>
     </Provider>

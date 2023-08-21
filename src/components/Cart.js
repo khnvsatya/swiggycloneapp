@@ -32,7 +32,6 @@ function Cart() {
 
   useEffect(() => {
     handleCartTotal(cartItems);
-    console.log("this is useeffect");
   }, [cartItems]);
 
   return (

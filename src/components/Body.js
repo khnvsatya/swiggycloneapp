@@ -19,7 +19,7 @@ const Body = () => {
     const fil = (isFilter ? filteredRes : listOfRes).filter((res) =>
       res.info.name.toLowerCase().includes(searchText.toLowerCase())
     );
-    // console.log(listOfRes, fil);
+
     setFilteredRes(fil);
     setSearchText("");
   };
@@ -28,11 +28,9 @@ const Body = () => {
     const filteredList = listOfRes?.filter(
       (res) => res?.info?.avgRating > value
     );
-    console.log(filteredList);
+
     setIsFilter(true);
     setFilteredRes(filteredList);
-
-    // console.log("non ui exicution", filter);
   };
 
   useEffect(() => {
@@ -43,17 +41,12 @@ const Body = () => {
     try {
       const data = await fetch(DATA_URL);
       const json = await data.json();
-      // setListofRes(json?.data?.cards[2]?.data?.data?.cards);
-      // setFilteredRes(json?.data?.cards[2]?.data?.data?.cards);
+
       setListofRes(
         json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants
       );
       setFilteredRes(
-        json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
-          ?.restaurants
-      );
-      console.log(
         json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants
       );
@@ -65,7 +58,7 @@ const Body = () => {
   if (onlineStatus == false) {
     return <h1>it's look like you are Offline, check your connection</h1>;
   }
-  console.log(listOfRes, filteredRes);
+
   if (listOfRes?.length === 0) {
     return <ShimmerContainer />;
   }
