@@ -4,8 +4,8 @@ import Body from "./components/Body";
 import { Outlet, createBrowserRouter } from "react-router-dom";
 import Error from "./components/Error";
 import Contact from "./components/Contact";
-import { OnlineContext, UserContext } from "./utils/UserContext";
-import UseOnlineStatus from "./utils/UseOnlineStatus";
+import { OnlineContext, userContext } from "./utils/userContext";
+import useOnlineStatus from "./utils/useOnlineStatus";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
 
@@ -16,7 +16,7 @@ const Cart = lazy(() => import("./components/Cart"));
 const About = lazy(() => import("./components/About"));
 
 const App = () => {
-  const onlineState = UseOnlineStatus();
+  const onlineState = useOnlineStatus();
   const [username, setUsername] = useState();
 
   useEffect(() => {
@@ -30,9 +30,9 @@ const App = () => {
     <Provider store={appStore}>
       <OnlineContext.Provider value={onlineState}>
         <div className="app">
-          <UserContext.Provider value={{ loggedInUser: username }}>
+          <userContext.Provider value={{ loggedInUser: username }}>
             <Header />
-          </UserContext.Provider>
+          </userContext.Provider>
           <Outlet />
         </div>
       </OnlineContext.Provider>
