@@ -4,7 +4,7 @@ import Body from "./components/Body";
 import { Outlet, createBrowserRouter } from "react-router-dom";
 import Error from "./components/Error";
 import Contact from "./components/Contact";
-import { UserContext } from "./utils/userContext";
+import { UserContext } from "./utils/UserContext";
 
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
