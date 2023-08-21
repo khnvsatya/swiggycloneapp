@@ -1,8 +1,5 @@
 import { createContext } from "react";
-import useOnlineStatus from "./UseOnlineStatus";
 
-export const UserContext = createContext({
+export const userContext = createContext({
   loggedInUser: "satya",
 });
-
-export const OnlineContext = createContext(false);

@@ -1,12 +1,13 @@
 import React, { useContext } from "react";
 import { LOGO_URL } from "../utils/constant";
 import { Link } from "react-router-dom";
-import { UserContext, OnlineContext } from "../utils/UserContext";
+import { userContext } from "../utils/userContext";
 import { useSelector } from "react-redux";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Header = () => {
-  const { loggedInUser } = useContext(UserContext);
-  let onlineState = useContext(OnlineContext);
+  const { loggedInUser } = useContext(userContext);
+  let onlineState = useOnlineStatus();
 
   const cartItems = useSelector((store) => store.cart.items);
 
