@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import ItemList from "./ItemList";
 import { clearCart } from "../utils/cartSlice";
 
 function Cart() {
   const dispath = useDispatch();
+  const navigate = useNavigate();
   const cartItems = useSelector((store) => store.cart.items);
 
   const [cartPage, setCartPage] = useState(true);
@@ -37,7 +38,7 @@ function Cart() {
   return (
     <div>
       {cartItems.length ? (
-        <div className="flex justify-normal">
+        <div className="flex flex-col justify-center md:flex-row md:justify-normal">
           <div className="menu-card w-8/12 my-[25px] ml-6">
             <div className="text-center mt-15">
               <button
@@ -82,12 +83,12 @@ function Cart() {
           <p className="mb-4">
             your Cart is Empty, please add Some items to Yor Cart
           </p>
-          <Link
-            to="/"
+          <span
+            onClick={(e) => navigate("/")}
             className=" text-white bg-black mt-5 p-2 rounded cursor-pointer"
           >
             Home
-          </Link>
+          </span>
         </div>
       )}
     </div>

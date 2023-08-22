@@ -9,3 +9,6 @@ export const LOGO_URL =
 
 export const MENU_URL =
   "https://corsproxy.io/?https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=17.416889&lng=78.43867&restaurantId=";
+
+export const HAMBURGER_URL =
+  "https://cdn.icon-icons.com/icons2/2596/PNG/512/hamburger_button_menu_icon_155296.png";

@@ -2,17 +2,17 @@ import React, { useState, useEffect } from "react";
 import ResturantCard from "./RestaurantCard";
 import ShimmerContainer from "./ShimmerContainer";
 import { Link, useNavigate } from "react-router-dom";
-import UseOnlineStatus from "../utils/useOnlinestatus";
+import useOnlineStatus from "../utils/useOnlinestatus";
 import { ResturantCardWithPromoted } from "./RestaurantCard";
 import { DATA_URL } from "../utils/constant";
 
 const Body = () => {
-  const navigate = useNavigate();
   const [listOfRes, setListofRes] = useState([]);
   const [filteredRes, setFilteredRes] = useState([]);
   const [isFilter, setIsFilter] = useState(false);
   const [searchText, setSearchText] = useState("");
-  const onlineStatus = UseOnlineStatus();
+  const navigate = useNavigate();
+  const onlineStatus = useOnlineStatus();
   const WithPromotedCard = ResturantCardWithPromoted(ResturantCard);
 
   const handleSearch = () => {
@@ -67,8 +67,32 @@ const Body = () => {
   }
   return (
     <div className="main-body bg-opacity-50 ">
-      <div className="filter-box flex py-[5px] px-[20px] mr-[10px] align-middle justify-between">
-        <div>
+      <div className="filter-box flex flex-col py-[10px] px-[20px] mr-[10px] justify-center items-center md:flex-row md:justify-between">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSearch();
+          }}
+        >
+          <div className="search mt-6 p-[10px] mb-2 w-full inline-flex md:w-auto">
+            <input
+              className=" text-left p-[5px] border-2 w-full rounded-lt-[25px] rounded-l-[25px] focus:outline-0"
+              type="text"
+              onChange={(e) => {
+                setSearchText(e.target.value);
+              }}
+              value={searchText}
+            />
+            <button
+              type="submit"
+              className="p-[5px] rounded-r-[25px] rounded-br-[25px] border-2"
+            >
+              Search
+            </button>
+          </div>
+        </form>
+
+        <div className="">
           <button
             className="filter-btn p-[5px] border-2 rounded-full ml-[12px] bg-slate-100 "
             onClick={() => {
@@ -97,25 +121,9 @@ const Body = () => {
             </button>
           )}
         </div>
-        <div className="search p-[10px]">
-          <input
-            className=" text-left p-[5px] border-2 rounded-lt-[25px] rounded-l-[25px] focus:outline-0"
-            type="text"
-            onChange={(e) => {
-              setSearchText(e.target.value);
-            }}
-            value={searchText}
-          />
-          <button
-            className="p-[5px] rounded-r-[25px] rounded-br-[25px] border-2"
-            onClick={handleSearch}
-          >
-            Search
-          </button>
-        </div>
       </div>
-      <div className="h-full w-full">
-        <div className="res-Container max-w-screen-xl m-auto flex flex-wrap align-middle">
+      <div className="h-[100vh] w-full">
+        <div className="res-Container  m-auto flex flex-wrap justify-center items-center lg:max-w-screen-xl lg:justify-start">
           {filteredRes?.map((res) => (
             <Link
               to={"/restaurant/" + (res?.data?.id | res?.info?.id)}

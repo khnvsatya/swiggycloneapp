@@ -1,23 +1,39 @@
-import React, { useContext } from "react";
-import { LOGO_URL } from "../utils/constant";
-import { Link } from "react-router-dom";
-import { UserContext } from "../utils/UserContext";
+import React, { useContext, useState } from "react";
+import { HAMBURGER_URL, LOGO_URL } from "../utils/constant";
+import { Link, useNavigate } from "react-router-dom";
+import { userContext } from "../utils/userContext";
 import { useSelector } from "react-redux";
-import UseOnlineStatus from "../utils/useOnlinestatus";
+import useOnlineStatus from "../utils/useOnlinestatus";
 
 const Header = () => {
-  const { loggedInUser } = useContext(UserContext);
-  let onlineState = UseOnlineStatus();
+  const [showMenu, setShowMenu] = useState(true);
+  const { loggedInUser } = useContext(userContext);
+  let onlineState = useOnlineStatus();
 
   const cartItems = useSelector((store) => store.cart.items);
 
   return (
-    <div className="header flex justify-between shadow-sm">
+    <div className="header flex flex-col items-center justify-center text-center shadow-sm w-[90%] md:flex-row md:justify-between md:w-full">
       <div className="logoContainer  ">
         <img className="logo w-24 h-auto" src={LOGO_URL} alt="Fast Food Logo" />
       </div>
-      <div className="nav-items">
-        <ul className="flex justify-center align-middle m-5  text-xl">
+      <div className="nav-items flex flex-col items-center lg:block ">
+        <div
+          className="HambuggerContainer lg:hidden"
+          onClick={() => setShowMenu(!showMenu)}
+        >
+          <img
+            className="logo w-7 h-7"
+            src={HAMBURGER_URL}
+            alt="Hambugger Menu"
+          />
+        </div>
+
+        <ul
+          className={`flex justify-center align-middle flex-col m-5 text-xl ${
+            showMenu ? "hidden" : "block"
+          } md:flex-row lg:flex`}
+        >
           <li className="p-4 cursor-pointer">
             Online Status: {onlineState ? "✅" : "🔴"}
           </li>
