@@ -1,5 +1,5 @@
 import React from "react";
-import { CDN_URL } from "../utils/constant";
+import { CDN_URL } from "../utils/constants";
 
 const ResturantCard = ({ resInfo }) => {
   // console.log(resInfo);

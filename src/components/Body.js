@@ -4,7 +4,7 @@ import ShimmerContainer from "./ShimmerContainer";
 import { Link, useNavigate } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlinestatus";
 import { ResturantCardWithPromoted } from "./RestaurantCard";
-import { DATA_URL } from "../utils/constant";
+import { DATA_URL } from "../utils/constants";
 
 const Body = () => {
   const [listOfRes, setListofRes] = useState([]);
@@ -67,7 +67,7 @@ const Body = () => {
   }
   return (
     <div className="main-body bg-opacity-50 ">
-      <div className="filter-box flex flex-col py-[10px] px-[20px] mr-[10px] justify-center items-center md:flex-row md:justify-between">
+      <div className="filter-box flex flex-col py-[10px] px-[20px]  justify-center items-center md:flex-row md:justify-between">
         <form
           onSubmit={(e) => {
             e.preventDefault();

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { HAMBURGER_URL, LOGO_URL } from "../utils/constant";
+import { HAMBURGER_URL, LOGO_URL } from "../utils/constants";
 import { Link, useNavigate } from "react-router-dom";
 import { userContext } from "../utils/userContext";
 import { useSelector } from "react-redux";
@@ -13,13 +13,13 @@ const Header = () => {
   const cartItems = useSelector((store) => store.cart.items);
 
   return (
-    <div className="header flex flex-col items-center justify-center text-center shadow-sm w-[90%] md:flex-row md:justify-between md:w-full">
-      <div className="logoContainer  ">
-        <img className="logo w-24 h-auto" src={LOGO_URL} alt="Fast Food Logo" />
+    <div className="header flex flex-col items-center justify-center text-center shadow-sm w-[100%] md:flex-row md:justify-between md:w-full">
+      <div className="logoContainer my-3 ">
+        <img className="logo w-16 h-auto" src={LOGO_URL} alt="Fast Food Logo" />
       </div>
       <div className="nav-items flex flex-col items-center lg:block ">
         <div
-          className="HambuggerContainer lg:hidden"
+          className="HambuggerContainer md:hidden"
           onClick={() => setShowMenu(!showMenu)}
         >
           <img
