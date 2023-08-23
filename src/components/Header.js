@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { userContext } from "../utils/UserContext";
 import useOnlineStatus from "../utils/useOnlineStatus";
 const Header = () => {
-  const [showMenu, setShowMenu] = useState(true);
+  const [showMenu, setShowMenu] = useState(false);
   const { loggedInUser } = useContext(userContext);
   let onlineState = useOnlineStatus();
 
@@ -31,7 +31,7 @@ const Header = () => {
         <ul
           className={`flex justify-center align-middle flex-col m-5 text-xl ${
             showMenu ? "hidden" : "block"
-          } md:flex-row lg:flex`}
+          } md:flex-row md:flex`}
         >
           <li className="p-4 cursor-pointer">
             Online Status: {onlineState ? "✅" : "🔴"}
