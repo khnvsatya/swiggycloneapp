@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { HAMBURGER_URL, LOGO_URL } from "../utils/constants";
 import { Link, useNavigate } from "react-router-dom";
-import { userContext } from "../utils/userContext";
+import { userContext } from "../utils/UserContext";
 import { useSelector } from "react-redux";
 import useOnlineStatus from "../utils/useOnlinestatus";
 
