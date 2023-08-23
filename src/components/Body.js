@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import ResturantCard from "./RestaurantCard";
 import ShimmerContainer from "./ShimmerContainer";
 import { Link, useNavigate } from "react-router-dom";
-
 import { ResturantCardWithPromoted } from "./RestaurantCard";
 import { DATA_URL } from "../utils/constants";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
   const [listOfRes, setListofRes] = useState([]);

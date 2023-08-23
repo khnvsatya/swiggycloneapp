@@ -2,9 +2,8 @@ import React, { useContext, useState } from "react";
 import { HAMBURGER_URL, LOGO_URL } from "../utils/constants";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-
 import { userContext } from "../utils/UserContext";
-
+import useOnlineStatus from "../utils/useOnlineStatus";
 const Header = () => {
   const [showMenu, setShowMenu] = useState(true);
   const { loggedInUser } = useContext(userContext);
