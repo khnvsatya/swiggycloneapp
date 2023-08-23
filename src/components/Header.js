@@ -3,6 +3,7 @@ import { HAMBURGER_URL, LOGO_URL } from "../utils/constants";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import useOnlineStatus from "../utils/useOnlinestatus";
+import { userContext } from "../utils/UserContext";
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState(true);
